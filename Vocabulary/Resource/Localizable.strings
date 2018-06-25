@@ -10,6 +10,9 @@
 "lesson.check.action.button.title" = "CHECK";
 "lesson.next.action.button.title" = "CONTINUE";
 
+"summary.restart.action-button.title" = "RESTART";
+"summary.share.action-button.title" = "SHARE";
+
 "summary.header.lesson.completed" = "Congratulations, you just finished lesson successfully!";
 "summary.header.lesson.attempt.finished" = "You successfully finished the lesson!";
 

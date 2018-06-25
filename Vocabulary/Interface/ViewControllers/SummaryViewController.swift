@@ -15,9 +15,15 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var correctAnswersCountLabel: UILabel!
     @IBOutlet weak var incorrectAnswersCountLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
-
     @IBOutlet weak var answerResultStackView: UIStackView!
 
+    // Computed property
+    var actionType = ActionType.restart {
+        didSet {
+            self.actionButton.setTitle(actionType.buttonTitle, for: .normal)
+        }
+    }
+    
     // Stored properties
     var viewModel: SummaryViewModel?
     var observation: NSKeyValueObservation?
@@ -75,11 +81,37 @@ extension SummaryViewController {
         
         if viewModel?.isLessonCompleted == true {
             answerResultStackView.isHidden = true
-            actionButton.isHidden = true
+            self.actionType = .share
         } else {
             correctAnswersCountLabel.attributedText = viewModel?.correctAnswerLabelString
             incorrectAnswersCountLabel.attributedText = viewModel?.wrongAnswerLabelString
+            self.actionType = .restart
         }
+    }
+    
+    private func handleAction() {
+        switch self.actionType {
+        case .restart:
+            self.dismiss(animated: true, completion: nil)
+        case .share:
+            self.handleShareActivity()
+        }
+    }
+    
+    private func handleShareActivity() {
+        let path = (self.viewModel?.dataProvider as! FileSystemDataProvider).filePath
+        let activityVC = UIActivityViewController(activityItems: [path], applicationActivities: [])
+        activityVC.excludedActivityTypes = [
+            UIActivityType.assignToContact,
+            UIActivityType.saveToCameraRoll,
+            UIActivityType.postToFlickr,
+            UIActivityType.postToVimeo,
+            UIActivityType.postToTencentWeibo,
+            UIActivityType.postToTwitter,
+            UIActivityType.postToFacebook,
+            UIActivityType.openInIBooks
+        ]
+        self.present(activityVC, animated: true, completion: nil)
     }
 }
 
@@ -87,6 +119,18 @@ extension SummaryViewController {
 extension SummaryViewController {
     
     @IBAction func actionButtonTapped(_ button: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        self.handleAction()
+    }
+    
+    enum ActionType {
+        case restart
+        case share
+        
+        var buttonTitle: String {
+            switch self {
+            case .restart: return "summary.restart.action-button.title".localized
+            case .share: return "summary.share.action-button.title".localized
+            }
+        }
     }
 }
