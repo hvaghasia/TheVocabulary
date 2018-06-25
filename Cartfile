@@ -1,0 +1,5 @@
+# External libs 
+github "Swinject/Swinject"
+github "Swinject/SwinjectStoryboard"
+github "Quick/Quick"
+github "Quick/Nimble"

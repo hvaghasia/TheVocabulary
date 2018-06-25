@@ -1,0 +1,4 @@
+github "Quick/Nimble" "v7.1.2"
+github "Quick/Quick" "v1.3.0"
+github "Swinject/Swinject" "2.4.1"
+github "Swinject/SwinjectStoryboard" "2.0.1"

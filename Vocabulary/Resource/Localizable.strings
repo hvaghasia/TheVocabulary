@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Vocabulary
+
+  Created by Hardik on 24/06/18.
+  Copyright © 2018 Avira. All rights reserved.
+*/
+
+
+"lesson.check.action.button.title" = "CHECK";
+"lesson.next.action.button.title" = "CONTINUE";
+
+"summary.header.lesson.completed" = "Congratulations, you just finished lesson successfully!";
+"summary.header.lesson.attempt.finished" = "You successfully finished the lesson!";
+
+"summary.result.correct.answers-count" = "Correct:  ";
+"summary.result.wrong.answers-count" = "Wrong:  ";
