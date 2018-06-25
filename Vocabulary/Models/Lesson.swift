@@ -19,6 +19,10 @@ final class Lesson: NSObject, JsonDecodable {
     
     let questions: [Question]
     
+    var questionsToBeAnswered: [Question] {
+        return questions.filter { $0.result < 4 }
+    }
+    
     init(json: [String : Any]) {
         self.questionLanguage = json["questionLanguage"] as? String ?? ""
         self.answerLanguage = json["answerLanguage"] as? String ?? ""

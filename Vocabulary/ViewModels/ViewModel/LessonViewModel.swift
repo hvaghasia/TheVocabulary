@@ -14,9 +14,11 @@ final class LessonViewModel: NSObject {
     var lesson: Lesson? {
         didSet {
             formatData()
-            currentQuestion = lesson?.questions.first
+            questionsDataSource = lesson?.questionsToBeAnswered ?? []
+            currentQuestion = questionsDataSource.first
         }
     }
+    
     
     // public stored properties
     var questionWordLanguageString = ""
@@ -24,12 +26,13 @@ final class LessonViewModel: NSObject {
     @objc dynamic var currentQuestion: Question?
     
     // Private stored properties
+    private var questionsDataSource = [Question]()
     private var currentQuestionIndex = 0
     private var nextQuestion: Question? {
         currentQuestionIndex += 1
-        guard currentQuestionIndex != lesson?.questions.count else { return nil }
+        guard currentQuestionIndex != questionsDataSource.count else { return nil }
         
-        return lesson?.questions[currentQuestionIndex]
+        return questionsDataSource[currentQuestionIndex]
     }
     
     // DI

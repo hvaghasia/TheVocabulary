@@ -46,11 +46,11 @@ final class SummaryViewModel: NSObject {
             }
             
             if let currentLesson = strongSelf.lesson {
-                let currentQuestions = currentLesson.questions
+                let currentQuestions = currentLesson.questionsToBeAnswered
                 if strongSelf.isLessonCompleted {
                     strongSelf.headerLabelString = "summary.header.lesson.completed".localized
                 } else if let oldLesson = oldLesson {
-                    let oldQuestions = oldLesson.questions
+                    let oldQuestions = oldLesson.questionsToBeAnswered
                     var correctAnswers = 0
                     var wrongAnswers = 0
                     for (old, new) in zip(oldQuestions, currentQuestions) {
